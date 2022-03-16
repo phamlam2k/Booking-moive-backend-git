@@ -23,12 +23,12 @@ class UserFactory extends Factory
     public function definition()
     {
         return [
-            'ho' => $this->faker->ho,
-            'ten' => $this->faker->ten,
-            'tuoi' => $this->faker->tuoi,
-            'dia_chi' => $this->faker->dia_chi,
-            'so_DT' => $this->faker->so_DT,
-            'CMND' => $this->faker->CMND,
+            'last_name' => $this->faker->lastName,
+            'first_name' => $this->faker->firstName,
+            'age' => $this->faker->randomNumber(),
+            'address' => $this->faker->address,
+            'phonenumber' => $this->faker->phoneNumber,
+            'person_id' => $this->faker->randomNumber(),
             'email' => $this->faker->unique()->safeEmail,
             'email_verified_at' => now(),
             'password' => bcrypt("123456"),

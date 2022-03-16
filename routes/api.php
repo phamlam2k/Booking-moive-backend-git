@@ -22,3 +22,19 @@ Route::group([
     Route::post('/refresh', [AuthController::class, 'refresh']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
 });
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'movies'
+], function ($router) {
+    Route::get('/', [\App\Http\Controllers\MovieController::class, 'index']);
+    Route::get('/{id}', [\App\Http\Controllers\MovieController::class, 'detail']);
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'advertise'
+], function ($router) {
+    Route::get('/', [\App\Http\Controllers\AdvertisementController::class, 'index']);
+});
+
