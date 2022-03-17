@@ -13,6 +13,8 @@ class Movie extends Model
         'name',
         'type_of_movie',
         'range_of_movie',
+        'range_age',
+        'dimension',
         'start_date',
         'start_time',
         'actor',

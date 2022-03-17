@@ -34,7 +34,8 @@ class MovieController extends Controller
             }
         }catch(\Exception $err){
             return response()->json([
-                'err' => $err
+                'err' => $err,
+                'mess' => 'Something went wrong'
             ], 500);
         }
     }
@@ -56,7 +57,51 @@ class MovieController extends Controller
             }
         }catch(\Exception $err){
             return response()->json([
-                'err' => $err
+                'err' => $err,
+                'mess' => 'Something went wrong'
+            ], 500);
+        }
+    }
+
+    public function store(Request $request){
+        try {
+            $result = $this->movieService->add($request);
+
+            if($result->validate){
+                return response()->json($result->validate->errors(), 422);
+            }else{
+                return response()->json([
+                    'status' => 1,
+                    'data' => $result
+                ], 201);
+            }
+        }catch(\Exception $err){
+            return response()->json([
+                'err' => $err,
+                'mess' => 'Something went wrong'
+            ], 500);
+        }
+    }
+
+    public function delete($id){
+        try {
+            $result = $this->movieService->delete($id);
+
+            if($result){
+                return response()->json([
+                    'status' => 1,
+                    'message' => 'Delete successful'
+                ], 201);
+            }else{
+                return response()->json([
+                    'status' => 0,
+                    'message' => 'You dont have movies details'
+                ], 404);
+            }
+        }catch (\Exception $err){
+            return response()->json([
+                'err' => $err,
+                'mess' => 'Something went wrong'
             ], 500);
         }
     }
