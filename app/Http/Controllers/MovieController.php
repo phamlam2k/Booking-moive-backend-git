@@ -2,7 +2,7 @@
 
 namespace App\Http\Controllers;
 
-use App\Movies\MovieService;
+use App\Services\MovieService;
 use Illuminate\Http\Request;
 
 class MovieController extends Controller

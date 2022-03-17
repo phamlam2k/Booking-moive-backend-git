@@ -2,7 +2,6 @@
 
 namespace App\Http\Controllers;
 
-use App\Mail\UserVerification;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;

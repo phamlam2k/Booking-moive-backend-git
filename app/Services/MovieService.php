@@ -1,6 +1,6 @@
 <?php
 
-namespace App\Movies;
+namespace App\Services;
 use App\Models\Movie;
 use Illuminate\Support\Facades\DB;
 
