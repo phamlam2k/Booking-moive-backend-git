@@ -27,7 +27,6 @@ class MovieService{
         $dimension = $request->dimension;
         $range_of_movie = $request->range_of_movie;
         $start_date = $request->start_date;
-        $start_time = $request->start_time;
         $actor = $request->actor;
         $direct = $request->direct;
         $description = $request->description;
@@ -40,7 +39,6 @@ class MovieService{
             'dimension' => 'required',
             'range_of_movie' => 'required',
             'start_date' => 'required',
-            'start_time' => 'required',
             'actor' => 'required',
             'direct' => 'required',
             'description' => 'required',

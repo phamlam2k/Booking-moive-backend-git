@@ -29,8 +29,8 @@ Route::group([
 ], function ($router) {
     Route::get('/', [\App\Http\Controllers\MovieController::class, 'index']);
     Route::get('/{id}', [\App\Http\Controllers\MovieController::class, 'detail']);
-    Route::get('/store', [\App\Http\Controllers\MovieController::class, 'store']);
-    Route::get('/delete/{id}', [\App\Http\Controllers\MovieController::class, 'delete']);
+    Route::post('/store', [\App\Http\Controllers\MovieController::class, 'store']);
+    Route::post('/delete/{id}', [\App\Http\Controllers\MovieController::class, 'delete']);
 });
 
 Route::group([

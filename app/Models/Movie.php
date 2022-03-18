@@ -16,7 +16,6 @@ class Movie extends Model
         'range_age',
         'dimension',
         'start_date',
-        'start_time',
         'actor',
         'director',
         'trailer'

@@ -21,7 +21,6 @@ class CreateMoviesTable extends Migration
             $table->string('dimension');
             $table->string('range_of_movie');
             $table->string('start_date');
-            $table->string('start_time');
             $table->string('actor');
             $table->string('director');
             $table->string('description');
