@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\MovieService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Validator;
 
 class MovieController extends Controller
 {
@@ -105,7 +106,11 @@ class MovieController extends Controller
                     'description' => $description,
                     'trailer' => $trailer,
                 ]);
-                return $data;
+
+                return response()->json([
+                    'status' => 1,
+                    'message' => "Add movie successful"
+                ], 201);
             }
         }catch(\Exception $err){
             return response()->json([
