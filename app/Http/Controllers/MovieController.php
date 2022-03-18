@@ -4,6 +4,7 @@ namespace App\Http\Controllers;
 
 use App\Services\MovieService;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 
 class MovieController extends Controller
 {
@@ -65,15 +66,46 @@ class MovieController extends Controller
 
     public function store(Request $request){
         try {
-            $result = $this->movieService->add($request);
+            $name = $request->name;
+            $type_movie = $request->type_of_movie;
+            $range_age = $request->range_age;
+            $dimension = $request->dimension;
+            $range_of_movie = $request->range_of_movie;
+            $start_date = $request->start_date;
+            $actor = $request->actor;
+            $direct = $request->direct;
+            $description = $request->description;
+            $trailer = $request->trailer;
 
-            if($result->validate){
-                return response()->json($result->validate->errors(), 422);
+            $validator = Validator::make($request->all(), [
+                'name' => 'required',
+                'type_of_movie' => 'required',
+                'range_age' => 'required',
+                'dimension' => 'required',
+                'range_of_movie' => 'required',
+                'start_date' => 'required',
+                'actor' => 'required',
+                'direct' => 'required',
+                'description' => 'required',
+                'trailer' => 'required',
+            ]);
+
+            if($validator->fails()){
+                return response()->json($validator->errors()->toJson(), 400);
             }else{
-                return response()->json([
-                    'status' => 1,
-                    'data' => $result
-                ], 201);
+                $data = DB::table('movies')->insert([
+                    'name' => $name,
+                    'type_of_movie' => $type_movie,
+                    'range_age' => $range_age,
+                    'dimension' => $dimension,
+                    'range_of_movie' => $range_of_movie,
+                    'start_date' => $start_date,
+                    'actor' => $actor,
+                    'director' => $direct,
+                    'description' => $description,
+                    'trailer' => $trailer,
+                ]);
+                return $data;
             }
         }catch(\Exception $err){
             return response()->json([

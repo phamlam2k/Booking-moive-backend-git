@@ -48,16 +48,15 @@ class MovieService{
         if($validator->fails()){
             return ["validate" => $validator];
         }else{
-            $data = DB::table('')->insert([
+            $data = DB::table('movies')->insert([
                 'name' => $name,
                 'type_of_movie' => $type_movie,
                 'range_age' => $range_age,
                 'dimension' => $dimension,
                 'range_of_movie' => $range_of_movie,
                 'start_date' => $start_date,
-                'start_time' => $start_time,
                 'actor' => $actor,
-                'direct' => $direct,
+                'director' => $direct,
                 'description' => $description,
                 'trailer' => $trailer,
             ]);
