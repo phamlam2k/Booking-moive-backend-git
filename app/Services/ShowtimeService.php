@@ -1,13 +1,12 @@
 <?php
-
 namespace App\Services;
-use App\Models\Movie;
+use App\Models\Showtime;
 use http\Env\Request;
 use Illuminate\Support\Facades\DB;
 
-class MovieService{
+class ShowtimeService{
     public function getAll($limit, $page, $keyword){
-        $data = DB::table('movies')
+        $data = DB::table('showtime')
             ->where('name', 'LIKE', "%{$keyword}%")
             ->offset(($page - 1)*10)
             ->paginate($limit);
@@ -16,13 +15,13 @@ class MovieService{
     }
 
     public function getDetail($id){
-        $data = Movie::find($id);
+        $data = Showtime::find($id);
 
         return $data;
     }
 
     public function delete($id){
-        $result = DB::table('movies')->delete($id);
+        $result = DB::table('showtime')->delete($id);
 
         return $result;
     }

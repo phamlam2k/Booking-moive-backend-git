@@ -1,12 +1,12 @@
 <?php
 
 namespace App\Services;
-use App\Models\Advertisement;
+use App\Models\Room;
 use Illuminate\Support\Facades\DB;
 
-class AdvertisementService{
+class RoomService{
     public function getAll($limit, $page, $keyword){
-        $data = DB::table('advertisements')
+        $data = DB::table('rooms')
             ->where('name', 'LIKE', "%{$keyword}%")
             ->offset(($page - 1)*10)
             ->paginate($limit);
@@ -15,23 +15,23 @@ class AdvertisementService{
     }
 
     public function getDetail($id){
-        $data = Advertisement::find($id);
+        $data = Room::find($id);
 
         return $data;
     }
 
     public function delete($id){
-        $result = DB::table('advertisements')->delete($id);
+        $result = DB::table('rooms')->delete($id);
 
         return $result;
     }
 
     public function update($request){
         $id = $request->id;
-        $image = $request->image;
+        $number_seat = $request->number_seat;
         $name = $request->name;
 
-        $result = DB::update('update advertisements set image = ?, name = ? where id = ?', [$image, $name, $id]);
+        $result = DB::update('update rooms set number_seat = ?, name = ? where id = ?', [$number_seat, $name, $id]);
 
         return $result;
     }

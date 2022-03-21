@@ -18,8 +18,8 @@ class CreateSeatTable extends Migration
             $table->string('row');
             $table->integer('order');
             $table->string('type_seat');
-            $table->bigInteger('room_id')->unsigned()->index();
-//            $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
+            $table->unsignedBigInteger('room_id');
+            $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
             $table->timestamps();
         });
     }

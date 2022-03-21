@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Models\User;
 use Carbon\Carbon;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Mail;
 use Validator;
 
@@ -104,5 +105,35 @@ class AuthController extends Controller
             'expires_in' => auth()->factory()->getTTL() * 60,
             'user' => auth()->user()
         ]);
+    }
+
+    protected function getList(Request $request){
+        try {
+            $limit = $request->limit;
+            $keyword = $request->keyword;
+            $page = $request->page;
+
+            $result = DB::table('users')
+                ->where('first_name', 'LIKE', "%{$keyword}%")
+                ->offset(($page - 1)*10)
+                ->paginate($limit);
+
+            if($result){
+                return response()->json([
+                    'status' => 1,
+                    'data' => $result,
+                ], 201);
+            }else{
+                return response()->json([
+                    'status' => 0,
+                    'message' => "No data",
+                ], 201);
+            }
+        }catch(\Exception $err){
+            return response()->json([
+                'err' => $err,
+                'mess' => 'Something went wrong'
+            ], 500);
+        }
     }
 }

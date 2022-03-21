@@ -73,6 +73,7 @@ class MovieController extends Controller
             $dimension = $request->dimension;
             $range_of_movie = $request->range_of_movie;
             $start_date = $request->start_date;
+            $poster = $request->poster;
             $actor = $request->actor;
             $direct = $request->direct;
             $description = $request->description;
@@ -85,6 +86,7 @@ class MovieController extends Controller
                 'dimension' => 'required',
                 'range_of_movie' => 'required',
                 'start_date' => 'required',
+                'poster' => 'required',
                 'actor' => 'required',
                 'direct' => 'required',
                 'description' => 'required',
@@ -101,16 +103,25 @@ class MovieController extends Controller
                     'dimension' => $dimension,
                     'range_of_movie' => $range_of_movie,
                     'start_date' => $start_date,
+                    'poster' => $poster,
                     'actor' => $actor,
                     'director' => $direct,
                     'description' => $description,
                     'trailer' => $trailer,
                 ]);
 
-                return response()->json([
-                    'status' => 1,
-                    'message' => "Add movie successful"
-                ], 201);
+                if($data){
+                    return response()->json([
+                        'status' => 1,
+                        'message' => "Add movie successful"
+                    ], 201);
+                }else{
+                    return response()->json([
+                        'status' => 0,
+                        'message' => "Add movie fail"
+                    ], 404);
+                }
+
             }
         }catch(\Exception $err){
             return response()->json([
@@ -141,5 +152,9 @@ class MovieController extends Controller
                 'mess' => 'Something went wrong'
             ], 500);
         }
+    }
+
+    public function update(Request $request){
+
     }
 }
