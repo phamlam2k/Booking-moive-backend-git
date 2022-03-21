@@ -6,6 +6,7 @@ use App\Http\Controllers\MovieController;
 use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\SeatController;
 use App\Http\Controllers\RoomController;
+use App\Http\Controllers\ShowtimeController;
 
 /*
 |--------------------------------------------------------------------------
