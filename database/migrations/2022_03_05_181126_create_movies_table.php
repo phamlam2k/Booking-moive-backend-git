@@ -20,12 +20,12 @@ class CreateMoviesTable extends Migration
             $table->string('range_age');
             $table->string('dimension');
             $table->string('range_of_movie');
-            $table->string('poster');
+            $table->string('poster', '1000');
             $table->string('start_date');
             $table->string('actor');
             $table->string('director');
-            $table->string('description');
-            $table->string('trailer');
+            $table->string('description', '2000');
+            $table->string('trailer', '1000');
             $table->timestamps();
         });
     }
