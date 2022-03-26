@@ -81,7 +81,7 @@ class SeatController extends Controller
             if($validator->fails()){
                 return response()->json($validator->errors()->toJson(), 400);
             }else{
-                $data = DB::table('rooms')->insert([
+                $data = DB::table('seats')->insert([
                     'row' => $row,
                     'order' => $order,
                     'type_seat' => $type_seat,

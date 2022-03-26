@@ -2,16 +2,16 @@
 
 namespace App\Http\Controllers;
 
-use App\Models\Advertisement;
 use App\Services\AdvertisementService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Validator;
 
 class AdvertisementController extends Controller
 {
     private $advertisementService;
     public function __construct(AdvertisementService $advertisementService) {
-        $this->middleware('advertise:api', ['except' => ['index']]);
+        $this->middleware('auth:api', ['except' => ['index']]);
         $this->advertisementService = $advertisementService;
     }
 

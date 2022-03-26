@@ -56,7 +56,7 @@ Route::group([
     'prefix' => 'seat'
 ], function ($router) {
     Route::get('/', [SeatController::class, 'index']);
-    Route::get('{id}', [SeatController::class, 'detail']);
+    Route::get('/{id}', [SeatController::class, 'detail']);
     Route::post('/store', [SeatController::class, 'store']);
     Route::post('/delete/{id}', [SeatController::class, 'delete']);
     Route::post('/update', [SeatController::class, 'update']);

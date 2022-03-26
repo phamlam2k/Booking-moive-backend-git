@@ -11,7 +11,7 @@ class MovieController extends Controller
 {
     private $movieService;
     public function __construct(MovieService $movieService) {
-        $this->middleware('auth:api');
+        $this->middleware('auth:api', ['except' => ['index']]);
         $this->movieService = $movieService;
     }
 
