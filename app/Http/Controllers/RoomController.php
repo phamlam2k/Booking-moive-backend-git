@@ -5,6 +5,9 @@ namespace App\Http\Controllers;
 use App\Services\RoomService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Validator;
+
+
 
 class RoomController extends Controller
 {
