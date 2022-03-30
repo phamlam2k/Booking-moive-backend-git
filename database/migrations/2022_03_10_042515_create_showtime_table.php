@@ -17,8 +17,6 @@ class CreateShowtimeTable extends Migration
             $table->bigIncrements('id');
             $table->string('show_date');
             $table->string('show_time');
-            $table->bigInteger('payment_id')->unsigned()->index();
-            $table->foreign('payment_id')->references('id')->on('payments')->onDelete('cascade');
             $table->bigInteger('room_id')->unsigned()->index();
             $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');
             $table->bigInteger('movie_id')->unsigned()->index();

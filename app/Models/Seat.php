@@ -8,6 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class Seat extends Model
 {
     use HasFactory;
+    protected $table = "seats";
 
     protected $fillable = [
         'row',
@@ -20,4 +21,9 @@ class Seat extends Model
         'created_at' => 'datetime:Y-m-d H:i:s',
         'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
+
+    public function room(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Room::class, "room_id");
+    }
 }

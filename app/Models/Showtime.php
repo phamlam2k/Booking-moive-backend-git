@@ -8,17 +8,25 @@ use Illuminate\Database\Eloquent\Model;
 class Showtime extends Model
 {
     use HasFactory;
+    protected $table = "showtime";
 
     protected $fillable = [
-        'payment_id',
         'room_id',
         'movie_id',
     ];
 
     protected $casts = [
-        'show_date' => 'datetime:Y-m-d',
-        'show_time' => 'datetime:H:i:s',
         'created_at' => 'datetime:Y-m-d H:i:s',
         'updated_at' => 'datetime:Y-m-d H:i:s',
     ];
+
+    public function room(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Room::class, "room_id");
+    }
+
+    public function movie(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Movie::class, "movie_id");
+    }
 }

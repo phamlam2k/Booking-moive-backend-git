@@ -1,16 +1,21 @@
 <?php
 namespace App\Services;
 use App\Models\Showtime;
-use http\Env\Request;
 use Illuminate\Support\Facades\DB;
 
 class ShowtimeService{
     public function getAll($limit, $page, $keyword){
-        $data = DB::table('showtime')
-            ->where('name', 'LIKE', "%{$keyword}%")
+        $data = Showtime::with(['room', 'movie'])
+            ->where('room_id', 'LIKE', "%{$keyword}%")
             ->offset(($page - 1)*10)
             ->paginate($limit);
 
+        for ($i = 0; $i < count($data); $i ++){
+            $data[$i]['room'] = $data[$i]->room;
+            $data[$i]['movie'] = $data[$i]->movie;
+            unset($data[$i]['room_id']);
+            unset($data[$i]['movie_id']);
+        }
         return $data;
     }
 

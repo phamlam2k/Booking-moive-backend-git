@@ -11,7 +11,7 @@ class MovieController extends Controller
 {
     private $movieService;
     public function __construct(MovieService $movieService) {
-        $this->middleware('auth:api', ['except' => ['index']]);
+        $this->middleware('auth:api', ['except' => ['index', 'detail']]);
         $this->movieService = $movieService;
     }
 
@@ -183,6 +183,29 @@ class MovieController extends Controller
                 ], 404);
             }
         }catch(\Exception $err) {
+            response()->json([
+                'err' => $err,
+                'mess' => 'Something went wrong'
+            ], 500);
+        }
+    }
+
+    public function select() {
+        try {
+            $result = DB::select('SELECT id, name FROM `movies`');
+
+            if($result){
+                return response()->json([
+                    'status' => 1,
+                    'data' => $result
+                ], 201);
+            }else{
+                return response()->json([
+                    'status' => 0,
+                    'data' => $result
+                ], 404);
+            }
+        }catch(\Exception $err){
             response()->json([
                 'err' => $err,
                 'mess' => 'Something went wrong'

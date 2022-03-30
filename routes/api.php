@@ -35,6 +35,7 @@ Route::group([
     'prefix' => 'movies'
 ], function ($router) {
     Route::get('/', [MovieController::class, 'index']);
+    Route::get('/select', [MovieController::class, 'select']);
     Route::get('/{id}', [MovieController::class, 'detail']);
     Route::post('/store', [MovieController::class, 'store']);
     Route::post('/delete/{id}', [MovieController::class, 'delete']);
@@ -67,6 +68,7 @@ Route::group([
     'prefix' => 'room'
 ], function ($router) {
     Route::get('/', [RoomController::class, 'index']);
+    Route::get('/select', [RoomController::class, 'select']);
     Route::get('{id}', [RoomController::class, 'detail']);
     Route::post('/store', [RoomController::class, 'store']);
     Route::post('/delete/{id}', [RoomController::class, 'delete']);

@@ -127,4 +127,27 @@ class RoomController extends Controller
             ], 500);
         }
     }
+
+    public function select() {
+        try {
+            $result = DB::select('SELECT id, name FROM `rooms`');
+
+            if($result){
+                return response()->json([
+                    'status' => 1,
+                    'data' => $result
+                ], 201);
+            }else{
+                return response()->json([
+                    'status' => 0,
+                    'data' => $result
+                ], 404);
+            }
+        }catch(\Exception $err){
+            response()->json([
+                'err' => $err,
+                'mess' => 'Something went wrong'
+            ], 500);
+        }
+    }
 }

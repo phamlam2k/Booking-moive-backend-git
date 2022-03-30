@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Services\SeatService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
+use Validator;
 
 class SeatController extends Controller
 {
@@ -67,26 +68,28 @@ class SeatController extends Controller
     public function store(Request $request){
         try {
             $row = $request->row;
-            $order = $request->order;
+            $num_order = $request->num_order;
             $type_seat = $request->type_seat;
             $room_id = $request->room_id;
 
             $validator = Validator::make($request->all(), [
                 'row' => 'required',
-                'order' => 'required',
                 'type_seat' => 'required',
                 'room_id' => 'required',
             ]);
 
+
             if($validator->fails()){
                 return response()->json($validator->errors()->toJson(), 400);
             }else{
-                $data = DB::table('seats')->insert([
-                    'row' => $row,
-                    'order' => $order,
-                    'type_seat' => $type_seat,
-                    'room_id' => $room_id,
-                ]);
+                for ($i = 1; $i <= $num_order; $i++){
+                    $data = DB::table('seats')->insert([
+                        'row' => $row,
+                        'order' => $i,
+                        'type_seat' => $type_seat,
+                        'room_id' => $room_id,
+                    ]);
+                }
 
                 if($data){
                     return response()->json([
