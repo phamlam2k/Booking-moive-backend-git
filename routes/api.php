@@ -61,6 +61,7 @@ Route::group([
     Route::post('/store', [SeatController::class, 'store']);
     Route::post('/delete/{id}', [SeatController::class, 'delete']);
     Route::post('/update', [SeatController::class, 'update']);
+    Route::get('/in_room/{id}', [SeatController::class, 'seatOfRoom']);
 });
 
 Route::group([

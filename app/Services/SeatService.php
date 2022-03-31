@@ -30,7 +30,9 @@ class SeatService{
         return $result;
     }
 
-    public function seatOfRoom() {
+    public function seatOfRoom($id) {
+        $data = DB::table('seats')->where('room_id', 'LIKE', $id)->get();
 
+        return $data;
     }
 }

@@ -78,7 +78,6 @@ class SeatController extends Controller
                 'room_id' => 'required',
             ]);
 
-
             if($validator->fails()){
                 return response()->json($validator->errors()->toJson(), 400);
             }else{
@@ -104,6 +103,29 @@ class SeatController extends Controller
                 }
             }
         }catch(\Exception $err){
+            return response()->json([
+                'err' => $err,
+                'mess' => 'Something went wrong'
+            ], 500);
+        }
+    }
+
+    public function seatOfRoom($id) {
+        try {
+            $result = $this->seatService->seatOfRoom($id);
+
+            if($result){
+                return response()->json([
+                    'status' => 1,
+                    'data' => $result
+                ], 201);
+            }else{
+                return response()->json([
+                    'status' => 0,
+                    'message' => 'You dont have seat detail'
+                ], 404);
+            }
+        } catch(\Exception $err) {
             return response()->json([
                 'err' => $err,
                 'mess' => 'Something went wrong'
