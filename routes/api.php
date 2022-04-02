@@ -7,6 +7,9 @@ use App\Http\Controllers\AdvertisementController;
 use App\Http\Controllers\SeatController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ShowtimeController;
+use App\Http\Controllers\NewsController;
+
+
 
 /*
 |--------------------------------------------------------------------------
@@ -85,4 +88,16 @@ Route::group([
     Route::post('/store', [ShowtimeController::class, 'store']);
     Route::post('/delete/{id}', [ShowtimeController::class, 'delete']);
     Route::post('/update', [ShowtimeController::class, 'update']);
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'news'
+], function ($router) {
+    Route::get('/', [NewsController::class, 'index']);
+    Route::get('/select', [NewsController::class, 'select']);
+    Route::get('{id}', [NewsController::class, 'detail']);
+    Route::post('/store', [NewsController::class, 'store']);
+    Route::post('/delete/{id}', [NewsController::class, 'delete']);
+    Route::post('/update', [NewsController::class, 'update']);
 });
