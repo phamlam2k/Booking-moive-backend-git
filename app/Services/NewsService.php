@@ -6,7 +6,7 @@ use Illuminate\Support\Facades\DB;
 
 class NewsService{
     public function getAll($limit, $page, $keyword){
-        $data = DB::table('movies')
+        $data = DB::table('news')
             ->where('name', 'LIKE', "%{$keyword}%")
             ->offset(($page - 1)*10)
             ->paginate($limit);

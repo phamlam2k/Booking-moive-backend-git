@@ -31,7 +31,7 @@ class NewsController extends Controller
             }else{
                 return response()->json([
                     'status' => 0,
-                    'message' => 'You dont have movies'
+                    'message' => 'You dont have news'
                 ], 404);
             }
         }catch(\Exception $err){
@@ -71,8 +71,6 @@ class NewsController extends Controller
             $detail = $request->detail;
             $image = $request->image;
             $description = $request->description;
-
-
 
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
