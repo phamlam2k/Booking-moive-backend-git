@@ -83,7 +83,7 @@ class NewsController extends Controller
             if($validator->fails()){
                 return response()->json($validator->errors()->toJson(), 400);
             }else{
-                $data = DB::table('movies')->insert([
+                $data = DB::table('news')->insert([
                     'name' => $name,
                     'detail' => $detail,
                     'image' => $image,
@@ -95,7 +95,7 @@ class NewsController extends Controller
                 if($data){
                     return response()->json([
                         'status' => 1,
-                        'message' => "Add movie successful"
+                        'message' => "Add news successful"
                     ], 201);
                 }else{
                     return response()->json([

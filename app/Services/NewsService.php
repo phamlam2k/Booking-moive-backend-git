@@ -33,7 +33,7 @@ class NewsService{
         $image = $request->image;
         $description =$request->description;
 
-        $result = DB::update('update movies set name = ?, detail =?, image =?, description =?,  where id = ?', [$name,$detail,$image,$description, $id]);
+        $result = DB::update('update news set name = ?, detail =?, image =?, description =?,  where id = ?', [$name,$detail,$image,$description, $id]);
 
         return $result;
     }
