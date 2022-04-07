@@ -20,6 +20,7 @@ class CreateTicketTable extends Migration
             $table->foreign('showtime_id')->references('id')->on('showtime')->onDelete('cascade');
             $table->bigInteger('seats_id')->unsigned()->index();
             $table->foreign('seats_id')->references('id')->on('seats')->onDelete('cascade');
+            $table->boolean('confirm');
             $table->integer('money');
             $table->timestamps();
         });

@@ -17,6 +17,7 @@ class CreateSeatTable extends Migration
             $table->bigIncrements('id');
             $table->string('row');
             $table->integer('order');
+            $table->integer('money');
             $table->string('type_seat');
             $table->unsignedBigInteger('room_id');
             $table->foreign('room_id')->references('id')->on('rooms')->onDelete('cascade');

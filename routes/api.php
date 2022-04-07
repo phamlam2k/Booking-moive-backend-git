@@ -8,7 +8,7 @@ use App\Http\Controllers\SeatController;
 use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ShowtimeController;
 use App\Http\Controllers\NewsController;
-
+use App\Http\Controllers\TicketController;
 
 
 /*
@@ -100,4 +100,12 @@ Route::group([
     Route::post('/store', [NewsController::class, 'store']);
     Route::post('/delete/{id}', [NewsController::class, 'delete']);
     Route::post('/update', [NewsController::class, 'update']);
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'tickets'
+], function ($router) {
+    Route::post('/order', [TicketController::class, 'orderTicket']);
+    Route::post('/pay', [TicketController::class, 'pay']);
 });

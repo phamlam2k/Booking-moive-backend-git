@@ -85,5 +85,4 @@ class ShowtimeController extends Controller
             ], 500);
         }
     }
-
 }

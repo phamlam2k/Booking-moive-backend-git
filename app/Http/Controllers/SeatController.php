@@ -69,11 +69,13 @@ class SeatController extends Controller
         try {
             $row = $request->row;
             $num_order = $request->num_order;
+            $money = $request->money;
             $type_seat = $request->type_seat;
             $room_id = $request->room_id;
 
             $validator = Validator::make($request->all(), [
                 'row' => 'required',
+                'money' => 'required',
                 'type_seat' => 'required',
                 'room_id' => 'required',
             ]);
@@ -85,6 +87,7 @@ class SeatController extends Controller
                     $data = DB::table('seats')->insert([
                         'row' => $row,
                         'order' => $i,
+                        'money' => $money,
                         'type_seat' => $type_seat,
                         'room_id' => $room_id,
                     ]);
