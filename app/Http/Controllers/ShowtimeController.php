@@ -55,7 +55,7 @@ class ShowtimeController extends Controller
                 'show_date' => 'required',
                 'show_time' => 'required',
                 'room_id' => 'required',
-                'movie_id' => 'required'
+                'movie_id' => 'required',
             ]);
 
             if($validator->fails()){

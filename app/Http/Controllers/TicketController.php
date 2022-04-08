@@ -20,16 +20,18 @@ class TicketController extends Controller
             $seats = $request->seats;
             $confirm = $request->confirm;
             $money = $request->money;
+            $user_id = $request->user_id;
             $created_at = $request->created_at;
             $updated_at = $request->created_at;
 
             $arr_seats = explode(",", $seats);
-            $arr_money = explode(',', $money);
+            $arr_money = explode(",", $money);
 
             for($i = 0; $i < count($arr_seats); $i ++) {
                 $result = DB::table('tickets')->insert([
                     'showtime_id' => $showtime_id,
                     'seats_id' => $arr_seats[$i],
+                    'user_id' => $user_id,
                     'confirm' => $confirm,
                     'money' => $arr_money[$i],
                     'created_at' => $created_at,
@@ -59,9 +61,13 @@ class TicketController extends Controller
     public function pay(Request $request) {
         try {
             $confirm = $request->confirm;
-            $id = $request->id;
+            $id_count = $request->id_count;
+            $showtime = $request->showtime;
 
-            $result = DB::update('update tickets set confirm = ?,   where id = ?', [$confirm, $id]);
+            $ar_id_count = explode(",", $id_count);
+            for($i = 0; $i < count($ar_id_count); $i ++) {
+                $result = DB::update('update tickets set confirm = ? where seats_id = ? and showtime_id = ?', [$confirm, $ar_id_count[$i], $showtime ]);
+            }
 
             if($result) {
                 return response()->json([
@@ -71,6 +77,7 @@ class TicketController extends Controller
             }else{
                 return response()->json([
                     'status' => 1,
+                    'data' => $result,
                     'message' => "You buy ticket fail"
                 ], 404);
             }
@@ -81,6 +88,5 @@ class TicketController extends Controller
             ], 500);
         }
     }
-
 
 }

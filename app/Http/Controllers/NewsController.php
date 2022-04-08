@@ -91,8 +91,6 @@ class NewsController extends Controller
                     'detail' => $detail,
                     'image' => $image,
                     'description' => $description,
-
-
                 ]);
 
                 if($data){
