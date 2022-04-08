@@ -72,6 +72,8 @@ class SeatController extends Controller
             $money = $request->money;
             $type_seat = $request->type_seat;
             $room_id = $request->room_id;
+            $created_at = $request->created_at;
+            $updated_at = $request->updated_at;
 
             $validator = Validator::make($request->all(), [
                 'row' => 'required',
@@ -90,6 +92,8 @@ class SeatController extends Controller
                         'money' => $money,
                         'type_seat' => $type_seat,
                         'room_id' => $room_id,
+                        'created_at' => $created_at,
+                        'updated_at' => $updated_at,
                     ]);
                 }
 

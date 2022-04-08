@@ -46,6 +46,8 @@ class RoomController extends Controller
         try {
             $name = $request->name;
             $number_seat = $request->number_seat;
+            $created_at = $request->created_at;
+            $updated_at = $request->updated_at;
 
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
@@ -58,6 +60,8 @@ class RoomController extends Controller
                 $data = DB::table('rooms')->insert([
                     'name' => $name,
                     'number_seat' => $number_seat,
+                    'created_at' => $created_at,
+                    'updated_at' => $updated_at,
                 ]);
 
                 if($data){

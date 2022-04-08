@@ -25,6 +25,7 @@ class TicketController extends Controller
 
             $arr_seats = explode(",", $seats);
             $arr_money = explode(',', $money);
+
             for($i = 0; $i < count($arr_seats); $i ++) {
                 $result = DB::table('tickets')->insert([
                     'showtime_id' => $showtime_id,

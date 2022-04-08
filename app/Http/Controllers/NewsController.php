@@ -71,13 +71,16 @@ class NewsController extends Controller
             $detail = $request->detail;
             $image = $request->image;
             $description = $request->description;
+            $created_at = $request->created_at;
+            $updated_at = $request->updated_at;
 
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
                 'detail'  => 'required',
                 'image'  => 'required',
                 'description'  => 'required',
-
+                'created_at' => $created_at,
+                'updated_at' => $updated_at,
             ]);
 
             if($validator->fails()){

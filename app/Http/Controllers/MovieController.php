@@ -78,6 +78,8 @@ class MovieController extends Controller
             $direct = $request->direct;
             $description = $request->description;
             $trailer = $request->trailer;
+            $created_at = $request->created_at;
+            $update_at = $request->updated_at;
 
             $validator = Validator::make($request->all(), [
                 'name' => 'required',
@@ -108,6 +110,8 @@ class MovieController extends Controller
                     'director' => $direct,
                     'description' => $description,
                     'trailer' => $trailer,
+                    'created_at' => $created_at,
+                    'updated_at' => $update_at,
                 ]);
 
                 if($data){

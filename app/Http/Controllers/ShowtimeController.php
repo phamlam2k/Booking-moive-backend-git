@@ -48,6 +48,8 @@ class ShowtimeController extends Controller
             $show_time = $request->show_time;
             $room_id = $request->room_id;
             $movie_id = $request->movie_id;
+            $created_at = $request->created_at;
+            $updated_at = $request->updated_at;
 
             $validator = Validator::make($request->all(), [
                 'show_date' => 'required',
@@ -64,6 +66,8 @@ class ShowtimeController extends Controller
                     'show_time' => $show_time,
                     'room_id' => $room_id,
                     'movie_id' => $movie_id,
+                    'created_at' => $created_at,
+                    'updated_at' => $updated_at,
                 ]);
 
                 if($data){
