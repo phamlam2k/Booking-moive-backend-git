@@ -28,8 +28,13 @@ class Ticket extends Model
         return $this->belongsTo(Showtime::class, "showtime_id");
     }
 
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class, "user_id");
+    }
+
     public function seat(): \Illuminate\Database\Eloquent\Relations\BelongsTo
     {
-        return $this->belongsTo(Seat::class, "seat_id");
+        return $this->belongsTo(Seat::class, "seats_id");
     }
 }

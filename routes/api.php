@@ -108,4 +108,5 @@ Route::group([
 ], function ($router) {
     Route::post('/order', [TicketController::class, 'orderTicket']);
     Route::post('/pay', [TicketController::class, 'pay']);
+    Route::post("/delete", [TicketController::class, 'delete']);
 });

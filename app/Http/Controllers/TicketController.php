@@ -14,6 +14,33 @@ class TicketController extends Controller
         $this->ticketService = $ticketService;
     }
 
+    public function index(Request $request) {
+        try {
+            $limit = $request->limit;
+            $page = $request->page;
+            $keyword = $request->keyword;
+
+            $result = $this->ticketService->getAll($limit, $page, $keyword);
+
+            if($result){
+                return response()->json([
+                    'status' => 1,
+                    'data' => $result
+                ], 201);
+            }else{
+                return response()->json([
+                    'status' => 0,
+                    'message' => 'You dont have showtime'
+                ], 404);
+            }
+        }catch(\Exception $err){
+            return response()->json([
+                'err' => $err,
+                'mess' => 'Something went wrong'
+            ], 500);
+        }
+    }
+
     public function orderTicket(Request $request) {
         try {
             $showtime_id = $request->showtime_id;
@@ -86,6 +113,35 @@ class TicketController extends Controller
                 'err' => $exception,
                 'mess' => 'Something went wrong'
             ], 500);
+        }
+    }
+
+    public function delete(Request $request) {
+        try {
+            $id_count = $request->id_count;
+            $showtime = $request->showtime;
+            $ar_id_count = explode(",", $id_count);
+
+            for($i = 0; $i < count($ar_id_count); $i ++) {
+                $result = DB::delete('DELETE FROM `tickets` WHERE seats_id = ? AND showtime_id = ?', [$ar_id_count[$i], $showtime]);
+            }
+
+            if($result) {
+                return response()->json([
+                    'status' => 1,
+                    'message' => "You denied buy ticket successful"
+                ], 201);
+            }else{
+                return response()->json([
+                    'status' => 1,
+                    'data' => $result,
+                    'message' => "You denied buy ticket fail"
+                ], 404);
+            }
+
+
+        } catch (\Exception $exception) {
+
         }
     }
 

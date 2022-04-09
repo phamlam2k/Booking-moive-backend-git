@@ -11,7 +11,7 @@ class SeatController extends Controller
 {
     private $seatService;
     public function __construct(SeatService $seatService) {
-        $this->middleware('auth:api');
+        $this->middleware('auth:api', ['except' => ['seatOfRoom']]);
         $this->seatService = $seatService;
     }
 
