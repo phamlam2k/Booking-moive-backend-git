@@ -30,7 +30,7 @@ class TicketController extends Controller
             }else{
                 return response()->json([
                     'status' => 0,
-                    'message' => 'You dont have showtime'
+                    'message' => 'You dont have ticket'
                 ], 404);
             }
         }catch(\Exception $err){

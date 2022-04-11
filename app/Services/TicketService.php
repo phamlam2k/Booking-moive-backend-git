@@ -9,7 +9,7 @@ class TicketService
 {
     public function getAll($limit, $page, $keyword) {
         $data = Ticket::with(['showtime', 'user', 'seat'])
-            ->where('room_id', 'LIKE', "%{$keyword}%")
+            ->where('showtime_id', 'LIKE', "%{$keyword}%")
             ->offset(($page - 1)*10)
             ->paginate($limit);
 

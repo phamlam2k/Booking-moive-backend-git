@@ -106,6 +106,7 @@ Route::group([
     'middleware' => 'api',
     'prefix' => 'tickets'
 ], function ($router) {
+    Route::get('/', [TicketController::class, 'index']);
     Route::post('/order', [TicketController::class, 'orderTicket']);
     Route::post('/pay', [TicketController::class, 'pay']);
     Route::post("/delete", [TicketController::class, 'delete']);

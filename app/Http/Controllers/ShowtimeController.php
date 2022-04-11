@@ -20,8 +20,10 @@ class ShowtimeController extends Controller
             $limit = $request->limit;
             $page = $request->page;
             $keyword = $request->keyword;
+            $date = $request->date;
+            $time = $request->time;
 
-            $result = $this->showtimeService->getAll($limit, $page, $keyword);
+            $result = $this->showtimeService->getAll($limit, $page, $keyword, $date, $time);
 
             if($result){
                 return response()->json([

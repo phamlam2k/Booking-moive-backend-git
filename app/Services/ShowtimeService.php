@@ -4,9 +4,10 @@ use App\Models\Showtime;
 use Illuminate\Support\Facades\DB;
 
 class ShowtimeService{
-    public function getAll($limit, $page, $keyword){
+    public function getAll($limit, $page, $keyword, $date, $time){
         $data = Showtime::with(['room', 'movie'])
             ->where('room_id', 'LIKE', "%{$keyword}%")
+            ->where('show_date', 'LIKE', "%{$date}%")
             ->offset(($page - 1)*10)
             ->paginate($limit);
 
