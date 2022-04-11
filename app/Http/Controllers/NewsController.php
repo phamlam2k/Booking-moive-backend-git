@@ -79,8 +79,6 @@ class NewsController extends Controller
                 'detail'  => 'required',
                 'image'  => 'required',
                 'description'  => 'required',
-                'created_at' => $created_at,
-                'updated_at' => $updated_at,
             ]);
 
             if($validator->fails()){
@@ -91,6 +89,8 @@ class NewsController extends Controller
                     'detail' => $detail,
                     'image' => $image,
                     'description' => $description,
+                    'created_at' => $created_at,
+                    'updated_at' => $updated_at,
                 ]);
 
                 if($data){
