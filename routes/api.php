@@ -84,6 +84,7 @@ Route::group([
     'prefix' => 'showtime'
 ], function ($router) {
     Route::get('/', [ShowtimeController::class, 'index']);
+    Route::get('/gettime', [ShowtimeController::class, 'getTime']);
     Route::get('{id}', [ShowtimeController::class, 'detail']);
     Route::post('/store', [ShowtimeController::class, 'store']);
     Route::post('/delete/{id}', [ShowtimeController::class, 'delete']);

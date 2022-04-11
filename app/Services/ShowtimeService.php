@@ -4,14 +4,16 @@ use App\Models\Showtime;
 use Illuminate\Support\Facades\DB;
 
 class ShowtimeService{
-    public function getAll($limit, $page, $keyword, $date, $time){
+    public function getAll($limit, $page, $keyword, $date, $time)
+    {
         $data = Showtime::with(['room', 'movie'])
             ->where('room_id', 'LIKE', "%{$keyword}%")
             ->where('show_date', 'LIKE', "%{$date}%")
-            ->offset(($page - 1)*10)
+            ->where('show_time', 'LIKE', "%{$time}%")
+            ->offset(($page - 1) * 10)
             ->paginate($limit);
 
-        for ($i = 0; $i < count($data); $i ++){
+        for ($i = 0; $i < count($data); $i++) {
             $data[$i]['room'] = $data[$i]->room;
             $data[$i]['movie'] = $data[$i]->movie;
             unset($data[$i]['room_id']);

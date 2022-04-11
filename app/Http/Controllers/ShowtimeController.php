@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Showtime;
 use App\Services\ShowtimeService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -87,6 +88,39 @@ class ShowtimeController extends Controller
         }catch(\Exception $err){
             return response()->json([
                 'err' => $err,
+                'mess' => 'Something went wrong'
+            ], 500);
+        }
+    }
+
+    public function getTime(Request $request) {
+        try {
+            $date = $request->date;
+
+            $result = Showtime::with(['room', 'movie'])
+                ->where('show_date', 'LIKE', "%{$date}%")
+                ->get();
+
+            for ($i = 0; $i < count($result); $i++) {
+                $result[$i]['room'] = $result[$i]->room;
+                $result[$i]['movie'] = $result[$i]->movie;
+                unset($result[$i]['room_id']);
+                unset($result[$i]['movie_id']);
+            }
+            if($result){
+                return response()->json([
+                    'status' => 1,
+                    'data' => $result
+                ], 201);
+            }else{
+                return response()->json([
+                    'status' => 0,
+                    'message' => 'You dont have showtime'
+                ], 404);
+            }
+        } catch (\Exception $exception) {
+            return response()->json([
+                'err' => $exception,
                 'mess' => 'Something went wrong'
             ], 500);
         }
