@@ -7,9 +7,10 @@ use Illuminate\Support\Facades\DB;
 
 class TicketService
 {
-    public function getAll($limit, $page, $keyword) {
+    public function getAll($limit, $page, $keyword, $seat) {
         $data = Ticket::with(['showtime', 'user', 'seat'])
-            ->where('showtime_id', 'LIKE', "%{$keyword}%")
+            ->where('showtime_id', 'LIKE', $keyword)
+            ->where('seats_id', 'LIKE', $seat)
             ->offset(($page - 1)*10)
             ->paginate($limit);
 

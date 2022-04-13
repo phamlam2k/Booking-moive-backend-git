@@ -19,8 +19,9 @@ class TicketController extends Controller
             $limit = $request->limit;
             $page = $request->page;
             $keyword = $request->keyword;
+            $seat = $request->seat;
 
-            $result = $this->ticketService->getAll($limit, $page, $keyword);
+            $result = $this->ticketService->getAll($limit, $page, $keyword, $seat);
 
             if($result){
                 return response()->json([

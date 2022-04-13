@@ -93,6 +93,29 @@ class ShowtimeController extends Controller
         }
     }
 
+    public function detail($id){
+        try{
+            $result = $this->showtimeService->getDetail($id);
+
+            if($result){
+                return response()->json([
+                    'status' => 1,
+                    'data' => $result
+                ], 201);
+            }else{
+                return response()->json([
+                    'status' => 0,
+                    'message' => 'You dont have movies details'
+                ], 404);
+            }
+        }catch(\Exception $err){
+            return response()->json([
+                'err' => $err,
+                'mess' => 'Something went wrong'
+            ], 500);
+        }
+    }
+
     public function getTime(Request $request) {
         try {
             $date = $request->date;
