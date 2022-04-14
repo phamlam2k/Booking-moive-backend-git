@@ -12,7 +12,7 @@ class ShowtimeController extends Controller
 {
     private $showtimeService;
     public function __construct(ShowtimeService $showtimeService) {
-        $this->middleware('auth:api', ['except' => ['index', 'detail']]);
+        $this->middleware('auth:api', ['except' => ['index', 'detail', 'getTime']]);
         $this->showtimeService = $showtimeService;
     }
 
