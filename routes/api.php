@@ -9,6 +9,10 @@ use App\Http\Controllers\RoomController;
 use App\Http\Controllers\ShowtimeController;
 use App\Http\Controllers\NewsController;
 use App\Http\Controllers\TicketController;
+use App\Http\Controllers\EvaluationController;
+use App\Http\Controllers\OpinionController;
+
+
 
 
 /*
@@ -112,4 +116,23 @@ Route::group([
     Route::post('/order', [TicketController::class, 'orderTicket']);
     Route::post('/pay', [TicketController::class, 'pay']);
     Route::post("/delete", [TicketController::class, 'delete']);
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'opinion'
+], function ($router) {
+    Route::get('/', [OpinionController::class, 'index']);
+    Route::get('/select', [OpinionController::class, 'select']);
+    Route::post('/store', [OpinionController::class, 'store']);
+    Route::post('/delete/{id}', [OpinionController::class, 'delete']);
+});
+
+Route::group([
+    'middleware' => 'api',
+    'prefix' => 'evaluation'
+], function ($router) {
+    Route::get('/', [EvaluationController::class, 'index']);
+    Route::post('/store', [EvaluationController::class, 'store']);
+    Route::post('/delete/{id}', [EvaluationController::class, 'delete']);
 });

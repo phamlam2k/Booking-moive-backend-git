@@ -13,10 +13,10 @@ class CreateOpinionTable extends Migration
      */
     public function up()
     {
-        Schema::create('opinions', function (Blueprint $table) {
+        Schema::create('opinion', function (Blueprint $table) {
             $table->bigIncrements('id');
-            $table->string('content');
-            $table->integer('confirm');
+            $table->string('detail');
+            $table->string('title');
             $table->bigInteger('user_id')->unsigned()->index();
             $table->foreign('user_id')->references('id')->on('users')->onDelete('cascade');
             $table->timestamps();

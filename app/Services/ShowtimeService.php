@@ -24,6 +24,10 @@ class ShowtimeService{
 
     public function getDetail($id){
         $data = Showtime::find($id);
+        $data['room'] = $data->room;
+        $data['movie'] = $data->movie;
+        unset($data['room_id']);
+        unset($data['movie_id']);
 
         return $data;
     }
