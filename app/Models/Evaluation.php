@@ -12,6 +12,21 @@ class  Evaluation extends Model
     protected  $table ='evaluation';
 
     protected $fillable =[
-        'user_id','movie_id','comment','star',
+        'user_id','movie_id','comment','stars',
     ];
+
+    protected $casts = [
+        'created_at' => 'datetime:Y-m-d H:i:s',
+        'updated_at' => 'datetime:Y-m-d H:i:s',
+    ];
+
+    public function user(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(User::class, "user_id");
+    }
+
+    public function movie(): \Illuminate\Database\Eloquent\Relations\BelongsTo
+    {
+        return $this->belongsTo(Movie::class, "movie_id");
+    }
 }

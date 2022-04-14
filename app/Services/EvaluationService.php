@@ -7,10 +7,17 @@ use Illuminate\Support\Facades\DB;
 
 class EvaluationService{
     public function getAll($limit, $page, $keyword){
-        $data = DB::table('evaluation')
-            ->where('id', 'LIKE', "%{$keyword}%")
+        $data = Evaluation::with(['movie', 'user'])
+            ->where('movie_id', 'LIKE', "%{$keyword}%")
             ->offset(($page - 1)*10)
             ->paginate($limit);
+
+        for ($i = 0; $i < count($data); $i++) {
+            $data[$i]['movie'] = $data[$i]->movie;
+            $data[$i]['user'] = $data[$i]->user;
+            unset($data[$i]['user_id']);
+            unset($data[$i]['movie_id']);
+        }
 
         return $data;
     }

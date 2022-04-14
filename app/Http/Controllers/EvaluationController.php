@@ -71,7 +71,8 @@ class EvaluationController extends Controller
             $movie_id = $request->movie_id;
             $comment = $request->comment;
             $stars = $request->stars;
-
+            $created_at = $request->created_at;
+            $updated_at = $request->updated_at;
 
             $validator = Validator::make($request->all(), [
                 'user_id' => 'required',
@@ -88,7 +89,8 @@ class EvaluationController extends Controller
                     'movie_id' => $movie_id,
                     'comment' => $comment,
                     'stars' => $stars,
-
+                    'created_at' => $created_at,
+                    'updated_at' => $updated_at,
                 ]);
 
                 if($data){
