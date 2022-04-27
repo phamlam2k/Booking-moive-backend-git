@@ -2,12 +2,17 @@
 namespace App\Services;
 use App\Models\Showtime;
 use Illuminate\Support\Facades\DB;
+use Illuminate\Database\Query\Builder;
 
 class ShowtimeService{
     public function getAll($limit, $page, $keyword, $date, $time)
     {
         $data = Showtime::with(['room', 'movie'])
-            ->where('room_id', 'LIKE', "%{$keyword}%")
+            ->whereIn('movie_id', function (Builder $q) use ($keyword) {
+                $q->select('id')
+                    ->from('movies')
+                    ->where('name', 'like',"%{$keyword}%");
+            })
             ->where('show_date', 'LIKE', "%{$date}%")
             ->where('show_time', 'LIKE', "%{$time}%")
             ->offset(($page - 1) * 10)

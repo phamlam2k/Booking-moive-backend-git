@@ -130,6 +130,7 @@ class ShowtimeController extends Controller
                 unset($result[$i]['room_id']);
                 unset($result[$i]['movie_id']);
             }
+
             if($result){
                 return response()->json([
                     'status' => 1,
