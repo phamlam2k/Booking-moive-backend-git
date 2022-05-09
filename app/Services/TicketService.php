@@ -3,7 +3,6 @@
 namespace App\Services;
 
 use App\Models\Ticket;
-use Illuminate\Support\Facades\DB;
 
 class TicketService
 {
@@ -23,5 +22,9 @@ class TicketService
             unset($data[$i]['seats_id']);
         }
         return $data;
+    }
+
+    public function getByUserId() {
+
     }
 }

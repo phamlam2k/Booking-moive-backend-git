@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers;
 
+use App\Models\Ticket;
 use App\Services\TicketService;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\DB;
@@ -142,8 +143,70 @@ class TicketController extends Controller
 
 
         } catch (\Exception $exception) {
-
+            return response()->json([
+                'err' => $exception,
+                'mess' => 'Something went wrong'
+            ], 500);
         }
     }
 
+    public function ticketDetail(Request $request) {
+        try {
+            $user_id = $request->user_id;
+
+            $data = DB::table('tickets')->where('user_id', 'LIKE', $user_id);
+
+            if($data) {
+                return response()->json([
+                    'status' => 1,
+                    'data' => $data
+                ], 201);
+            } else {
+                return response()->json([
+                    'status' => 1,
+                    'message' => 'You dont have ticket'
+                ], 201);
+            }
+        } catch (\Exception $exception) {
+            return response()->json([
+                'err' => $exception,
+                'mess' => 'Something went wrong'
+            ], 500);
+        }
+    }
+
+    public function ticketByUserID(Request $request) {
+        try {
+            $user_id = $request->user_id;
+
+            $data = Ticket::with(['showtime', 'user', 'seat'])->where('user_id', 'LIKE', $user_id)->get();
+
+            for ($i = 0; $i < count($data); $i ++) {
+                $data[$i]['showtime'] = $data[$i]->showtime;
+                $data[$i]['user'] = $data[$i]->user;
+                $data[$i]['seat'] = $data[$i]->seat;
+                unset($data[$i]['user_id']);
+                unset($data[$i]['showtime_id']);
+                unset($data[$i]['seats_id']);
+            }
+
+            if($data) {
+                return response()->json([
+                    'status' => 1,
+                    'user_id' => $user_id,
+                    'data' => $data
+                ], 201);
+            } else {
+                return response()->json([
+                    'status' => 1,
+                    'message' => 'You dont have ticket'
+                ], 201);
+            }
+        } catch (\Exception $exception) {
+            return response()->json([
+                'err' => $exception,
+                'mess' => 'Something went wrong'
+            ], 500);
+        }
+    }
 }

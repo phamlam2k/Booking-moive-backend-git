@@ -116,6 +116,8 @@ Route::group([
     Route::post('/order', [TicketController::class, 'orderTicket']);
     Route::post('/pay', [TicketController::class, 'pay']);
     Route::post("/delete", [TicketController::class, 'delete']);
+    Route::get("/ticket_user_id", [TicketController::class, 'ticketByUserID']);
+    Route::post("/id", [TicketController::class, 'ticketDetail']);
 });
 
 Route::group([
