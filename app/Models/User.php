@@ -2,7 +2,6 @@
 
 namespace App\Models;
 
-use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -18,7 +17,7 @@ class User extends Authenticatable implements JWTSubject
      * @var array
      */
     protected $fillable = [
-        'first_name', 'last_name', 'address', 'phonenumber', 'person_id', 'age', 'email', 'password','admin'
+        'full_name', 'email', 'role', 'gender', 'password', 'number_phone', 'address', 'birth', 'confirm', 'confirmation_code', 'confirmation_code_expired_in'
     ];
 
     /**

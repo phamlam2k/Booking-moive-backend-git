@@ -11,30 +11,22 @@ use App\Http\Controllers\NewsController;
 use App\Http\Controllers\TicketController;
 use App\Http\Controllers\EvaluationController;
 use App\Http\Controllers\OpinionController;
+use App\Http\Controllers\VerificationController;
 
-
-
-
-/*
-|--------------------------------------------------------------------------
-| API Routes
-|--------------------------------------------------------------------------
-|
-| Here is where you can register API routes for your application. These
-| routes are loaded by the RouteServiceProvider within a group which
-| is assigned the "api" middleware group. Enjoy building your API!
-|
-*/
 Route::group([
     'middleware' => 'api',
     'prefix' => 'auth'
 ], function ($router) {
     Route::post('/login', [AuthController::class, 'login']);
-    Route::post('/register', [AuthController::class, 'register']);
     Route::post('/logout', [AuthController::class, 'logout']);
     Route::post('/refresh', [AuthController::class, 'refresh']);
-    Route::get('/list', [AuthController::class, 'getList']);
     Route::get('/user-profile', [AuthController::class, 'userProfile']);
+    Route::post('/update_profile', [AuthController::class, 'updateProfile']);
+    Route::post('/register', [AuthController::class, 'register']);
+    Route::post('/re_register', [AuthController::class, 're_register']);
+
+    Route::post('email/verify_OTP',[VerificationController::class,'verify_OTP']);
+    Route::post('email/logout_OTP',[VerificationController::class,'logout_OTP']);
 });
 
 Route::group([

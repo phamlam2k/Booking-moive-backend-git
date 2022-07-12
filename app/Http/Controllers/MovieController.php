@@ -34,7 +34,7 @@ class MovieController extends Controller
                     'message' => 'You dont have movies'
                 ], 404);
             }
-        }catch(\Exception $err){
+        } catch(\Exception $err){
             return response()->json([
                 'err' => $err,
                 'mess' => 'Something went wrong'

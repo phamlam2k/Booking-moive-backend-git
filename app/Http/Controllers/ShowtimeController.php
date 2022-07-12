@@ -31,7 +31,7 @@ class ShowtimeController extends Controller
                     'status' => 1,
                     'data' => $result
                 ], 201);
-            }else{
+            } else{
                 return response()->json([
                     'status' => 0,
                     'message' => 'You dont have showtime'
