@@ -140,8 +140,6 @@ class TicketController extends Controller
                     'message' => "You denied buy ticket fail"
                 ], 404);
             }
-
-
         } catch (\Exception $exception) {
             return response()->json([
                 'err' => $exception,
